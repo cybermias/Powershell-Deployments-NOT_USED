@@ -43,15 +43,13 @@ $sb = { Set-ItemProperty -path HKLM:\Software\Microsoft\Windows\CurrentVersion\P
 Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $credential
 
 #"Install each Chocolatey Package"
-$chocoPackages = 'tightvnc -ia "VALUE_OF_USEVNCAUTHENTICATION=0 SET_ALWAYSSHARED=1 VALUE_OF_ALWAYSSHARED=1 SET_DISCONNECTACTION=1 VALUE_OF_DISCONNECTACTION=1"'
-$chocoPackages.Split(";") | ForEach {
-    $command = "cinst " + $_ + " -y -force"
-    $command 
-    $sb = [scriptblock]::Create("$command")
+$command = 'cinst tightvnc -ia "SET_USEVNCAUTHENTICATION=0 VALUE_OF_USEVNCAUTHENTICATION=0 SET_ALWAYSSHARED=1 VALUE_OF_ALWAYSSHARED=1 SET_DISCONNECTACTION=1 VALUE_OF_DISCONNECTACTION=1" -y -force'
+$command 
+$sb = [scriptblock]::Create("$command")
 
-    # Use the current user profile
-    Invoke-Command -ScriptBlock $sb -ArgumentList $chocoPackages -ComputerName $env:COMPUTERNAME -Credential $credential | Out-Null
-}
+# Use the current user profile
+Invoke-Command -ScriptBlock $sb -ArgumentList $chocoPackages -ComputerName $env:COMPUTERNAME -Credential $credential | Out-Null
+
 
 # Delete the artifactInstaller user
 $cn.Delete("User", $userName)
