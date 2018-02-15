@@ -48,7 +48,7 @@ $chocoPackages.Split(";") | ForEach {
     Invoke-Command -ScriptBlock $sb -ArgumentList $chocoPackages -ComputerName $env:COMPUTERNAME -Credential $credential
 }
 
-Disable-PSRemoting -Force
+#Disable-PSRemoting -Force
 
 # Delete the artifactInstaller user
 #$cn.Delete("User", $userName)
