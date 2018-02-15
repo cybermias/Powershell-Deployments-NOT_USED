@@ -1,22 +1,22 @@
-param([Parameter(Mandatory=$true)][string]$chocoPackages)
+param([Parameter(Mandatory=$true)][string]$chocoPackages,[string]$username,[string]$password)
 cls
 
 # Get username/password & machine name
-$userName = "artifactInstaller"
-[Reflection.Assembly]::LoadWithPartialName("System.Web") | Out-Null
-$password = $([System.Web.Security.Membership]::GeneratePassword(12,4))
-$cn = [ADSI]"WinNT://$env:ComputerName"
+#$userName = "artifactInstaller"
+#[Reflection.Assembly]::LoadWithPartialName("System.Web") | Out-Null
+#$password = $([System.Web.Security.Membership]::GeneratePassword(12,4))
+#$cn = [ADSI]"WinNT://$env:ComputerName"
 
 # Create new user
-$user = $cn.Create("User", $userName)
-$user.SetPassword($password)
-$user.SetInfo()
-$user.description = "Choco artifact installer"
-$user.SetInfo()
+#$user = $cn.Create("User", $userName)
+#$user.SetPassword($password)
+#$user.SetInfo()
+#$user.description = "Choco artifact installer"
+#$user.SetInfo()
 
 # Add user to the Administrators group
-$group = [ADSI]"WinNT://$env:ComputerName/Administrators,group"
-$group.add("WinNT://$env:ComputerName/$userName")
+#$group = [ADSI]"WinNT://$env:ComputerName/Administrators,group"
+#$group.add("WinNT://$env:ComputerName/$userName")
 
 # Create pwd and new $creds for remoting
 $secPassword = ConvertTo-SecureString $password -AsPlainText -Force
@@ -40,7 +40,7 @@ Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $cre
 
 #"Install each Chocolatey Package"
 $chocoPackages.Split(";") | ForEach {
-    $command = "cinst " + $_ + " -y -force --install-directory=c:\tools\" + $_
+    $command = "cinst " + $_ + " -y -force
     $command
     $sb = [scriptblock]::Create("$command")
 
@@ -51,7 +51,7 @@ $chocoPackages.Split(";") | ForEach {
 Disable-PSRemoting -Force
 
 # Delete the artifactInstaller user
-$cn.Delete("User", $userName)
+#$cn.Delete("User", $userName)
 
 # Delete the artifactInstaller user profile
-gwmi win32_userprofile | where { $_.LocalPath -like "*$userName*" } | foreach { $_.Delete() }
+#gwmi win32_userprofile | where { $_.LocalPath -like "*$userName*" } | foreach { $_.Delete() }
