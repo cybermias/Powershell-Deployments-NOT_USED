@@ -42,6 +42,17 @@ Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $cre
 $sb = { Set-ItemProperty -path HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System -name EnableLua -value 0 }
 Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $credential
 
+#"Install each Chocolatey Package"
+$chocoPackages = 'Cinst tightvnc -ia "VALUE_OF_USEVNCAUTHENTICATION=0 SET_ALWAYSSHARED=1 VALUE_OF_ALWAYSSHARED=1 SET_DISCONNECTACTION=1 VALUE_OF_DISCONNECTACTION=1"'
+$chocoPackages.Split(";") | ForEach {
+    $command = "cinst " + $_ + " -y -force"
+    $command | Out-File $LogFile -Append
+    $sb = [scriptblock]::Create("$command")
+
+    # Use the current user profile
+    Invoke-Command -ScriptBlock $sb -ArgumentList $chocoPackages -ComputerName $env:COMPUTERNAME -Credential $credential | Out-Null
+}
+
 # Delete the artifactInstaller user
 $cn.Delete("User", $userName)
 
