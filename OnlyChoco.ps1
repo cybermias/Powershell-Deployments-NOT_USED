@@ -31,6 +31,13 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 $sb = { iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1')) }
 Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $credential | Out-Null
 
+#Clean Windows10
+$sb = { iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/cybermias/test/master/CleanWin10.ps1')) }
+Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $credential | Out-Null
+
+$sb = { iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/cybermias/test/master/postInstall.ps1')) }
+Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $credential | Out-Null
+
 #"Disabling UAC" | Out-File $LogFile -Append
 $sb = { Set-ItemProperty -path HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System -name EnableLua -value 0 }
 Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $credential
