@@ -15,7 +15,6 @@ workflow Install-Workflow
         Install-Package -Name 7zip -Source Chocolatey -Force
         Install-Package -Name free-hex-editor-neo -Source Chocolatey -Force
         Install-Package -Name notepadplusplus -Source Chocolatey -Force
-        Install-Package -Name PowerGUI -Source Chocolatey -Force
         Install-Package -Name python2 -Source Chocolatey -Force
         Install-Package -Name hxd -Source Chocolatey -Force
     }
