@@ -46,7 +46,7 @@ Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $cre
 $chocoPackages = 'tightvnc -ia "VALUE_OF_USEVNCAUTHENTICATION=0 SET_ALWAYSSHARED=1 VALUE_OF_ALWAYSSHARED=1 SET_DISCONNECTACTION=1 VALUE_OF_DISCONNECTACTION=1"'
 $chocoPackages.Split(";") | ForEach {
     $command = "cinst " + $_ + " -y -force"
-    $command | Out-File $LogFile -Append
+    $command 
     $sb = [scriptblock]::Create("$command")
 
     # Use the current user profile
