@@ -24,7 +24,7 @@ $credential = New-Object System.Management.Automation.PSCredential("$env:COMPUTE
 Enable-PSRemoting -Force -SkipNetworkProfileCheck
 
 #"Changing ExecutionPolicy" | Out-File $LogFile -Append
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 
 # Install Choco
 #"Installing Chocolatey" | Out-File $LogFile -Append
