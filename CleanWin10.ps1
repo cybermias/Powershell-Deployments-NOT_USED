@@ -77,7 +77,7 @@ $tweaks = @(
 	# "HideNetworkFromLockScreen",    # "ShowNetworkOnLockScreen",
 	# "HideShutdownFromLockScreen",   # "ShowShutdownOnLockScreen",
 	"DisableStickyKeys",            # "EnableStickyKeys",
-	#"ShowTaskManagerDetails"        # "HideTaskManagerDetails",
+	# "ShowTaskManagerDetails",        # "HideTaskManagerDetails",
 	"ShowFileOperationsDetails",    # "HideFileOperationsDetails",
 	 "EnableFileDeleteConfirm",    # "DisableFileDeleteConfirm",
 	"HideTaskbarSearchBox",         # "ShowTaskbarSearchBox",
@@ -122,7 +122,7 @@ $tweaks = @(
 	"AddPhotoViewerOpenWith",       # "RemovePhotoViewerOpenWith",
 	# "DisableSearchAppInStore",      # "EnableSearchAppInStore",
 	# "DisableNewAppPrompt",          # "EnableNewAppPrompt",
-	"EnableF8BootMenu",             # "DisableF8BootMenu",
+	#"EnableF8BootMenu",             # "DisableF8BootMenu",
 	# "SetDEPOptOut",                 # "SetDEPOptIn",
 
 	### Server Specific Tweaks ###
