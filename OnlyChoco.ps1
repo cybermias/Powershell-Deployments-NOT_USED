@@ -43,7 +43,7 @@ $sb = { Set-ItemProperty -path HKLM:\Software\Microsoft\Windows\CurrentVersion\P
 Invoke-Command -ScriptBlock $sb -ComputerName $env:COMPUTERNAME -Credential $credential
 
 #"Install each Chocolatey Package"
-$command = 'choco install tightvnc -ia "SET_ALWAYSSHARED=1 VALUE_OF_ALWAYSSHARED=1 SET_DISCONNECTACTION=1 VALUE_OF_DISCONNECTACTION=1 SET_USEVNCAUTHENTICATION=1 VALUE_OF_USEVNCAUTHENTICATION=0" -y -force'
+$command = 'choco install tightvnc -ia "SET_ALWAYSSHARED=1 VALUE_OF_ALWAYSSHARED=1 SET_DISCONNECTACTION=1 VALUE_OF_DISCONNECTACTION=1 SET_USEVNCAUTHENTICATION=1 VALUE_OF_USEVNCAUTHENTICATION=1" -y -force'
 $command 
 $sb = [scriptblock]::Create("$command")
 
